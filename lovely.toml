@@ -32,41 +32,23 @@ target = "functions/misc_functions.lua"
 pattern = "function init_localization()"
 position = "after"
 payload = '''
-G.localization.misc.challenge_names.c_mod_riffraff_1= "Riff-Raffle"
-G.localization.misc.challenge_names.c_mod_face_down_1= "Face Down"
+G.localization.misc.challenge_names.c_mod_riffraff_1 = "Riff-Raffle"
+G.localization.misc.challenge_names.c_mod_fleeting_1 = "Fleeting Memory"
+G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
 '''
 match_indent = true
 overwrite = false
 
-# sacreligeous implimentation -- "quick and dirty" for sure
 [[patches]]
 [patches.pattern]
-target = "card.lua"
-pattern = "self.facing = 'front'"
-position = "at"
-payload = "if G.GAME.modifiers.face_down == true then self.facing = 'back' else self.facing = 'front' end"
-match_indent = true
-overwrite = true
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "self.sprite_facing = 'front'"
-position = "at"
-payload = "if G.GAME.modifiers.face_down == true then self.sprite_facing = 'back' else self.sprite_facing = 'front' end"
-match_indent = true
-overwrite = true
-
-# let's not mention this ever again.
-[[patches]]
-[patches.pattern]
-target = "cardarea.lua"
-pattern = "local stay_flipped = G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(self, card)"
+target = "functions/common_events.lua"
+pattern = "if (area == G.shop_jokers) or (area == G.pack_cards) then"
 position = "before"
-payload = """
-card.facing = 'front'
-card.sprite_facing = 'front'
-"""
+payload = '''
+if G.GAME.modifiers.all_perishable then
+     card:set_perishable(true)
+end
+'''
 match_indent = true
 overwrite = false
 
@@ -76,10 +58,10 @@ target = "game.lua"
 pattern = "elseif v.id == 'no_shop_jokers' then"
 position = "before"
 payload = """
- G.debug_tooltip_toggle = false
-elseif v.id == 'face_down' then
-    self.GAME.modifiers.face_down = true
-    G.debug_tooltip_toggle = true
+elseif v.id == 'all_perishable' then
+    self.GAME.modifiers.all_perishable = true
+elseif v.id == 'no_shop_planets' then
+    self.GAME.planet_rate = 0
 """
 match_indent = true
 overwrite = false
