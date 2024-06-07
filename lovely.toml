@@ -35,6 +35,19 @@ payload = '''
 G.localization.misc.challenge_names.c_mod_riffraff_1 = "Riff-Raffle"
 G.localization.misc.challenge_names.c_mod_fleeting_1 = "Fleeting Memory"
 G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
+G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "function init_localization()"
+position = "after"
+payload = '''
+G.localization.misc.v_text.ch_c_no_shop_planets = {"Planets no longer appear in the {C:attention}shop"}
+G.localization.misc.v_text.ch_c_all_perishable = {"All Jokers are {C:perishable}Perishable{}"}
 '''
 match_indent = true
 overwrite = false
