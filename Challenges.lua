@@ -99,7 +99,7 @@ CustomChallenges = {
         banned_other = {}
     }
 },  {
-    name = "Fleeting Memory",
+    name = "Anapodaphobia",
     id = 'c_mod_fleeting_1',
     rules = {
         custom = {
