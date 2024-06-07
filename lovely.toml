@@ -33,7 +33,7 @@ pattern = "function init_localization()"
 position = "after"
 payload = '''
 G.localization.misc.challenge_names.c_mod_riffraff_1 = "Riff-Raffle"
-G.localization.misc.challenge_names.c_mod_fleeting_1 = "Fleeting Memory"
+G.localization.misc.challenge_names.c_mod_fleeting_1 = "Anapodaphobia"
 G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
 G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
 '''
