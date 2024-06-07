@@ -36,6 +36,7 @@ G.localization.misc.challenge_names.c_mod_riffraff_1 = "Riff-Raffle"
 G.localization.misc.challenge_names.c_mod_fleeting_1 = "Fleeting Memory"
 G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
 G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
+G.localization.misc.challenge_names.c_mod_jimbofull_1 = "Jumbofull"
 '''
 match_indent = true
 overwrite = false
@@ -47,6 +48,7 @@ pattern = "function init_localization()"
 position = "after"
 payload = '''
 G.localization.misc.v_text.ch_c_no_shop_planets = {"Planets no longer appear in the {C:attention}shop"}
+G.localization.misc.v_text.ch_c_no_shop_tarots = {"Tarot cards no longer appear in the {C:attention}shop"}
 G.localization.misc.v_text.ch_c_all_perishable = {"All Jokers are {C:perishable}Perishable{}"}
 '''
 match_indent = true
@@ -75,6 +77,8 @@ elseif v.id == 'all_perishable' then
     self.GAME.modifiers.all_perishable = true
 elseif v.id == 'no_shop_planets' then
     self.GAME.planet_rate = 0
+elseif v.id == 'no_shop_tarots' then
+    self.GAME.tarot_rate = 0
 """
 match_indent = true
 overwrite = false
