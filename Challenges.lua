@@ -1,6 +1,14 @@
 local lovely = require("lovely")
 local nativefs = require("nativefs")
 
+function Card:set_perishable(_perishable) 
+    self.ability.perishable = nil
+    if (self.config.center.perishable_compat or G.GAME.modifiers.all_perishable) and not self.ability.eternal then 
+        self.ability.perishable = true
+        self.ability.perish_tally = G.GAME.perishable_rounds
+    end
+end
+
 ChallengeMod.config = {}
 ChallengeMod.config.face_down = false
 
