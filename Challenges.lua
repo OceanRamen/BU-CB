@@ -1,9 +1,9 @@
 local lovely = require("lovely")
 local nativefs = require("nativefs")
 
-function Card:set_perishable(_perishable) 
+function Card:set_perishable(_perishable)
     self.ability.perishable = nil
-    if (self.config.center.perishable_compat or G.GAME.modifiers.all_perishable) and not self.ability.eternal then 
+    if (self.config.center.perishable_compat or G.GAME.modifiers.all_perishable) and not self.ability.eternal then
         self.ability.perishable = true
         self.ability.perish_tally = G.GAME.perishable_rounds
     end
@@ -12,149 +12,111 @@ end
 ChallengeMod.config = {}
 ChallengeMod.config.face_down = false
 
-local challenge_swapped_pockets = {
-    name = 'Swapepd Pockets',
-    id = 'c_mod_swapped_pockets_1',
+local challenge_riff_raffle = {
+    name = 'Riff-Raffle',
+    id = 'c_mod_riffraff_1',
     rules = {
-        modifiers = {
-            {
-                id = 'joker_slots',
-                value = 2,
-            },
-            {
-                id = 'hand_size',
-                value = 5,
-            },
-            {
-                id = 'consumable_slots',
-                value = 8,
-            },
-            {
-                id = 'hands',
-                value = '3',
-            },
-            {
-                id = 'discards',
-                value = '4',
-            },
-        },
-        custom = {
-            {
-                id = 'cm_credit',
-                value = 'CampfireCollective',
-            }
-        },
+        custom = { {
+            id = 'no_reward'
+        }, {
+            id = 'no_extra_hand_money'
+        }, {
+            id = 'no_interest'
+        }, {
+            id = 'no_shop_jokers'
+        } },
+        modifiers = { {
+            id = 'dollars',
+            value = 0
+        }, {
+            id = 'discards',
+            value = 3
+        }, {
+            id = 'hands',
+            value = 4
+        }, {
+            id = 'reroll_cost',
+            value = 5
+        }, {
+            id = 'joker_slots',
+            value = 5
+        }, {
+            id = 'consumable_slots',
+            value = 3
+        }, {
+            id = 'hand_size',
+            value = 7
+        } },
     },
-    jokers = {},
+    jokers = { {
+        id = 'j_riff_raff',
+        edition = 'negative',
+        eternal = true,
+    } },
     consumeables = {},
     vouchers = {},
     deck = {
         type = 'Challenge Deck'
     },
-    restrictions = {},
+    restrictions = {
+        banned_cards = { {
+            id = 'c_judgement'
+        }, {
+            id = 'c_wraith'
+        }, {
+            id = 'c_ankh'
+        }, {
+            id = 'c_soul'
+        }, {
+            id = 'p_buffoon_normal_1',
+            ids = { 'p_buffoon_normal_1', 'p_buffoon_normal_2', 'p_buffoon_jumbo_1', 'p_buffoon_mega_1' }
+        }, {
+            id = 'v_seed_money'
+        }, {
+            id = 'v_money_tree'
+        }, {
+            id = 'j_golden'
+        }, {
+            id = 'j_business'
+        }, {
+            id = 'j_egg'
+        }, {
+            id = 'j_riff_raff'
+        }, {
+            id = 'j_ticket'
+        }, {
+            id = 'j_faceless'
+        }
+        },
+        banned_tags = { {
+            id = 'tag_rare'
+        }, {
+            id = 'tag_uncommon'
+        }, {
+            id = 'tag_holo'
+        }, {
+            id = 'tag_polychrome'
+        }, {
+            id = 'tag_negative'
+        }, {
+            id = 'tag_foil'
+        }, {
+            id = 'tag_buffoon'
+        } },
+        banned_other = {}
+    }
 }
 
-CustomChallenges = {
-    {
-        name = 'Riff-Raffle',
-        id = 'c_mod_riffraff_1',
-        rules = {
-            custom = { {
-                id = 'no_reward'
-            }, {
-                id = 'no_extra_hand_money'
-            }, {
-                id = 'no_interest'
-            }, {
-                id = 'no_shop_jokers'
-            } },
-            modifiers = { {
-                id = 'dollars',
-                value = 0
-            }, {
-                id = 'discards',
-                value = 3
-            }, {
-                id = 'hands',
-                value = 4
-            }, {
-                id = 'reroll_cost',
-                value = 5
-            }, {
-                id = 'joker_slots',
-                value = 5
-            }, {
-                id = 'consumable_slots',
-                value = 3
-            }, {
-                id = 'hand_size',
-                value = 7
-            } },
-        },
-        jokers = { {
-            id = 'j_riff_raff',
-            edition = 'negative',
-            eternal = true,
-        } },
-        consumeables = {},
-        vouchers = {},
-        deck = {
-            type = 'Challenge Deck'
-        },
-        restrictions = {
-            banned_cards = { {
-                id = 'c_judgement'
-            }, {
-                id = 'c_wraith'
-            }, {
-                id = 'c_ankh'
-            }, {
-                id = 'c_soul'
-            }, {
-                id = 'p_buffoon_normal_1',
-                ids = { 'p_buffoon_normal_1', 'p_buffoon_normal_2', 'p_buffoon_jumbo_1', 'p_buffoon_mega_1' }
-            }, {
-                id = 'v_seed_money'
-            }, {
-                id = 'v_money_tree'
-            }, {
-                id = 'j_golden'
-            }, {
-                id = 'j_business'
-            }, {
-                id = 'j_egg'
-            }, {
-                id = 'j_riff_raff'
-            }, {
-                id = 'j_ticket'
-            }, {
-                id = 'j_faceless'
-            }
-            },
-            banned_tags = { {
-                id = 'tag_rare'
-            }, {
-                id = 'tag_uncommon'
-            }, {
-                id = 'tag_holo'
-            }, {
-                id = 'tag_polychrome'
-            }, {
-                id = 'tag_negative'
-            }, {
-                id = 'tag_foil'
-            }, {
-                id = 'tag_buffoon'
-            } },
-            banned_other = {}
-        }
-    }, {
+local challenge_anapodaphobia = {
     name = "Anapodaphobia",
     id = 'c_mod_fleeting_1',
     rules = {
         custom = {
             { id = 'all_perishable' },
-            {id = 'credit', value = 'Djynasty'}
+            {
+                id = 'cm_credit',
+                value = 'Djynasty'
+            }
         },
         modifiers = {
         }
@@ -176,59 +138,17 @@ CustomChallenges = {
         banned_other = {
         }
     }
-},
-    {
-        name = "Tarot Tycoon",
-        id = 'c_mod_tarot_tycoon_1',
-        rules = {
-            custom = {
-                { id = 'no_shop_jokers' },
-                { id = 'no_shop_planets' },
-            },
-            modifiers = {
-            }
+}
+
+local challenge_tarot_tycoon = {
+    name = "Tarot Tycoon",
+    id = 'c_mod_tarot_tycoon_1',
+    rules = {
+        custom = {
+            { id = 'no_shop_jokers' },
+            { id = 'no_shop_planets' },
         },
-        jokers = {
-        },
-        consumeables = {
-        },
-        vouchers = {
-        },
-        deck = {
-            type = 'Challenge Deck'
-        },
-        restrictions = {
-            banned_cards = { {
-                id = 'p_buffoon_normal_1',
-                ids = { 'p_buffoon_normal_1', 'p_buffoon_normal_2', 'p_buffoon_jumbo_1', 'p_buffoon_mega_1' }
-            }, {
-                id = 'p_celestial_normal_1',
-                ids = { 'p_celestial_normal_1', 'p_celestial_normal_2', 'p_celestial_normal_3', 'p_celestial_normal_4', 'p_celestial_jumbo_1', 'p_celestial_jumbo_2', 'p_celestial_mega_1', 'p_celestial_mega_2' }
-            }, {
-                id = 'v_planet_merchant',
-            }, {
-                id = 'v_planet_tycoon',
-            },
-            },
-            banned_tags = { {
-                id = 'tag_rare'
-            }, {
-                id = 'tag_uncommon'
-            }, {
-                id = 'tag_holo'
-            }, {
-                id = 'tag_polychrome'
-            }, {
-                id = 'tag_negative'
-            }, {
-                id = 'tag_foil'
-            }, {
-                id = 'tag_buffoon'
-            }, {
-                id = 'tag_meteor'
-            } },
-            banned_other = {
-            }
+        modifiers = {
         }
     },
     jokers = {
@@ -241,22 +161,27 @@ CustomChallenges = {
         type = 'Challenge Deck'
     },
     restrictions = {
-        banned_cards = {{
-            id = 'p_buffoon_normal_1',
-            ids = {'p_buffoon_normal_1', 'p_buffoon_normal_2', 'p_buffoon_jumbo_1', 'p_buffoon_mega_1'}
-        }, {
-            id = 'p_celestial_normal_1',
-            ids = {'p_celestial_normal_1', 'p_celestial_normal_2', 'p_celestial_normal_3', 'p_celestial_normal_4', 'p_celestial_jumbo_1', 'p_celestial_jumbo_2', 'p_celestial_mega_1', 'p_celestial_mega_2'}
-        }, {
-            id = 'v_planet_merchant',
-        }, {
-            id = 'v_planet_tycoon',
-        },
+        banned_cards = {
+            {
+                id = 'p_buffoon_normal_1',
+                ids = { 'p_buffoon_normal_1', 'p_buffoon_normal_2', 'p_buffoon_jumbo_1', 'p_buffoon_mega_1' }
+            },
+            {
+                id = 'p_celestial_normal_1',
+                ids = { 'p_celestial_normal_1', 'p_celestial_normal_2', 'p_celestial_normal_3', 'p_celestial_normal_4', 'p_celestial_jumbo_1', 'p_celestial_jumbo_2', 'p_celestial_mega_1', 'p_celestial_mega_2' }
+            },
+            {
+                id = 'v_planet_merchant',
+            },
+            {
+                id = 'v_planet_tycoon',
+            },
             id = 'v_tarot_merchant',
-        }, {
+        },
+        {
             id = 'v_tarot_tycoon'
         },
-        banned_tags = {{
+        banned_tags = { {
             id = 'tag_rare'
         }, {
             id = 'tag_uncommon'
@@ -272,11 +197,13 @@ CustomChallenges = {
             id = 'tag_buffoon'
         }, {
             id = 'tag_meteor'
-        }},
+        } },
         banned_other = {
         }
     }
-}, {
+}
+
+local challenge_jimboful = {
     name = "Jimbofull",
     id = 'c_mod_jimbofull_1',
     rules = {
@@ -368,14 +295,19 @@ CustomChallenges = {
         banned_other = {
         }
     }
-}, {
+}
+
+local challenge_unfortunate = {
     name = "Unfortunate",
     id = 'c_mod_unfortunate_1',
     rules = {
         custom = {
             { id = 'no_shop_jokers' },
             { id = 'no_shop_planets' },
-            {id = 'credit_DrSpectred'}
+            {
+                id = 'cm_credit',
+                value = 'DrSpectred',
+            }
         },
         modifiers = {
             { id = 'discards', value = 1 },
@@ -418,7 +350,56 @@ CustomChallenges = {
         banned_other = {
         }
     }
-},
+}
+
+local challenge_swapped_pockets = {
+    name = 'Swapepd Pockets',
+    id = 'c_mod_swapped_pockets_1',
+    rules = {
+        modifiers = {
+            {
+                id = 'joker_slots',
+                value = 2,
+            },
+            {
+                id = 'hand_size',
+                value = 5,
+            },
+            {
+                id = 'consumable_slots',
+                value = 8,
+            },
+            {
+                id = 'hands',
+                value = '3',
+            },
+            {
+                id = 'discards',
+                value = '4',
+            },
+        },
+        custom = {
+            {
+                id = 'cm_credit',
+                value = 'CampfireCollective',
+            }
+        },
+    },
+    jokers = {},
+    consumeables = {},
+    vouchers = {},
+    deck = {
+        type = 'Challenge Deck'
+    },
+    restrictions = {},
+}
+
+CustomChallenges = {
+    challenge_riff_raffle,
+    challenge_anapodaphobia,
+    challenge_tarot_tycoon,
+    challenge_jimboful,
+    challenge_unfortunate,
     challenge_swapped_pockets,
 }
 
