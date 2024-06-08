@@ -37,6 +37,7 @@ G.localization.misc.challenge_names.c_mod_fleeting_1 = "Anapodaphobia"
 G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
 G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
 G.localization.misc.challenge_names.c_mod_jimbofull_1 = "Jumbofull"
+G.localization.misc.challenge_names.c_mod_swapped_pockets_1 = "Swapped Pockets"
 '''
 match_indent = true
 overwrite = false
@@ -50,7 +51,7 @@ payload = '''
 G.localization.misc.v_text.ch_c_no_shop_planets = {"Planets no longer appear in the {C:attention}shop"}
 G.localization.misc.v_text.ch_c_no_shop_tarots = {"Tarot cards no longer appear in the {C:attention}shop"}
 G.localization.misc.v_text.ch_c_all_perishable = {"All Jokers are {C:perishable}Perishable{}"}
-G.localization.misc.v_text.ch_c_credit = {"Concept by: {C:green}#1#{}"}
+G.localization.misc.v_text.ch_c_cm_credit = {"Concept by: {C:green}#1#{}"}
 '''
 match_indent = true
 overwrite = false
