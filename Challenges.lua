@@ -158,6 +158,9 @@ CustomChallenges = {
         }, {
             id = 'v_planet_tycoon',
         },
+            id = 'v_tarot_merchant',
+        }, {
+            id = 'v_tarot_tycoon'
         },
         banned_tags = {{
             id = 'tag_rare'
