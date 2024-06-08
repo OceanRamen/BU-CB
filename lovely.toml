@@ -29,9 +29,7 @@ sources = ["mod.lua"]
 target = "functions/misc_functions.lua"
 pattern = "function init_localization()"
 position = "after"
-payload = '''
-ChallengeMod.addLocalization()
-'''
+payload = 'ChallengeMod.addLocalization()'
 match_indent = true
 overwrite = false
 
@@ -42,7 +40,7 @@ pattern = "if (area == G.shop_jokers) or (area == G.pack_cards) then"
 position = "before"
 payload = '''
 if G.GAME.modifiers.all_perishable then
-     card:set_perishable(true)
+    card:set_perishable(true)
 end
 '''
 match_indent = true
