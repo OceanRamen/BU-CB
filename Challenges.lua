@@ -508,7 +508,7 @@ local challenge_swapped_pockets = {
 
 CustomChallenges = {
 	challenge_riff_raffle,
-	challenge_anapodaphobia,
+	challenge_fleeting_memory,
 	challenge_tarot_tycoon,
 	challenge_jimboful,
 	challenge_unfortunate,
