@@ -258,7 +258,7 @@ CustomChallenges.challenge_tarot_tycoon = {
 	},
 }
 
-CustomChallenges.hallenge_jimboful = {
+CustomChallenges.challenge_jimboful = {
 	name = "Jimboful",
 	id = "c_mod_jimboful_1",
 	rules = {
