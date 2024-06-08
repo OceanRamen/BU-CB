@@ -25,10 +25,9 @@ function Card:set_perishable(_perishable)
 	end
 end
 
-ChallengeMod.config = {}
-ChallengeMod.config.face_down = false
+CustomChallenge = {}
 
-local challenge_riff_raffle = {
+CustomChallenges.challenge_riff_raffle = {
 	name = "Riff-Raffle",
 	id = "c_mod_riffraff_1",
 	rules = {
@@ -157,7 +156,7 @@ local challenge_riff_raffle = {
 	},
 }
 
-local challenge_fleeting_memory = {
+CustomChallenges.challenge_fleeting_memory = {
 	name = "Fleeting Memory",
 	id = "c_mod_fleeting_1",
 	rules = {
@@ -183,7 +182,7 @@ local challenge_fleeting_memory = {
 	},
 }
 
-local challenge_tarot_tycoon = {
+CustomChallenges.challenge_tarot_tycoon = {
 	name = "Tarot Tycoon",
 	id = "c_mod_tarot_tycoon_1",
 	rules = {
@@ -259,7 +258,7 @@ local challenge_tarot_tycoon = {
 	},
 }
 
-local challenge_jimboful = {
+CustomChallenges.challenge_jimboful = {
 	name = "Jimboful",
 	id = "c_mod_jimboful_1",
 	rules = {
@@ -404,7 +403,7 @@ local challenge_jimboful = {
 	},
 }
 
-local challenge_unfortunate = {
+CustomChallenges.challenge_unfortunate = {
 	name = "Unfortunate",
 	id = "c_mod_unfortunate_1",
 	rules = {
@@ -464,7 +463,7 @@ local challenge_unfortunate = {
 	},
 }
 
-local challenge_swapped_pockets = {
+CustomChallenges.challenge_swapped_pockets = {
 	name = "Swapepd Pockets",
 	id = "c_mod_swapped_pockets_1",
 	rules = {
@@ -504,15 +503,6 @@ local challenge_swapped_pockets = {
 		type = "Challenge Deck",
 	},
 	restrictions = {},
-}
-
-CustomChallenges = {
-	challenge_riff_raffle,
-	challenge_fleeting_memory,
-	challenge_tarot_tycoon,
-	challenge_jimboful,
-	challenge_unfortunate,
-	challenge_swapped_pockets,
 }
 
 for i, v in ipairs(CustomChallenges) do
