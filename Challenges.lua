@@ -4,7 +4,7 @@ local nativefs = require("nativefs")
 function ChallengeMod.addLocalization()
 	--  Challenge Names
 	G.localization.misc.challenge_names.c_mod_riffraff_1 = "Riff-Raffle"
-	G.localization.misc.challenge_names.c_mod_fleeting_1 = "Anapodaphobia"
+	G.localization.misc.challenge_names.c_mod_fleeting_1 = "Fleeting Memory"
 	G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
 	G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
 	G.localization.misc.challenge_names.c_mod_jimbofull_1 = "Jumbofull"
@@ -157,8 +157,8 @@ local challenge_riff_raffle = {
 	},
 }
 
-local challenge_anapodaphobia = {
-	name = "Anapodaphobia",
+local challenge_fleeting_memory = {
+	name = "Fleeting Memory",
 	id = "c_mod_fleeting_1",
 	rules = {
 		custom = {
