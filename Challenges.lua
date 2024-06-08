@@ -7,7 +7,7 @@ function ChallengeMod.addLocalization()
 	G.localization.misc.challenge_names.c_mod_fleeting_1 = "Fleeting Memory"
 	G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
 	G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
-	G.localization.misc.challenge_names.c_mod_jimbofull_1 = "Jumbofull"
+	G.localization.misc.challenge_names.c_mod_jimboful_1 = "Jumboful"
 	G.localization.misc.challenge_names.c_mod_swapped_pockets_1 = "Swapped Pockets"
 	--  Challenge Descriptions
 	G.localization.misc.v_text.ch_c_no_shop_planets = { "Planets no longer appear in the {C:attention}shop" }
@@ -260,8 +260,8 @@ local challenge_tarot_tycoon = {
 }
 
 local challenge_jimboful = {
-	name = "Jimbofull",
-	id = "c_mod_jimbofull_1",
+	name = "Jimboful",
+	id = "c_mod_jimboful_1",
 	rules = {
 		custom = {
 			{ id = "no_shop_planets" },
