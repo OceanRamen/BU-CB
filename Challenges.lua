@@ -112,6 +112,7 @@ CustomChallenges = {
     rules = {
         custom = {
             {id = 'all_perishable'},
+            {id = 'credit', value = 'Djynasty'}
         },
         modifiers = {
         }
@@ -289,6 +290,7 @@ CustomChallenges = {
         custom = {
             {id = 'no_shop_jokers'},
             {id = 'no_shop_planets'},
+            {id = 'credit_DrSpectred'}
         },
         modifiers = {
             {id = 'discards', value = 1},
