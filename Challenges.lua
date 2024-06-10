@@ -12,6 +12,7 @@ function ChallengeMod.addLocalization()
   G.localization.misc.challenge_names.c_mod_budgeting_1 = "Budgeting"
   G.localization.misc.challenge_names.c_mod_bullseye_1 = "Bullseye"
   G.localization.misc.challenge_names.c_mod_load_bearing_1 = "Load Bearing"
+  G.localization.misc.challenge_names.c_mod_student_loan_debt_1 = "Student Loan Debt"
   --  Challenge Descriptions
   G.localization.misc.v_text.ch_c_no_shop_planets = { "Planets no longer appear in the {C:attention}shop" }
   G.localization.misc.v_text.ch_c_no_shop_tarots = { "Tarot cards no longer appear in the {C:attention}shop" }
