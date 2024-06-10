@@ -9,7 +9,6 @@ function ChallengeMod.addLocalization()
   G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
   G.localization.misc.challenge_names.c_mod_jimboful_1 = "Jimboful"
   G.localization.misc.challenge_names.c_mod_swapped_pockets_1 = "Swapped Pockets"
-  G.localization.misc.challenge_names.c_mod_student_loan_debt_1 = "Student Loan Debt"
   G.localization.misc.challenge_names.c_mod_budgeting_1 = "Budgeting"
   --  Challenge Descriptions
   G.localization.misc.v_text.ch_c_no_shop_planets = { "Planets no longer appear in the {C:attention}shop" }
