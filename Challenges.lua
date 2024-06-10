@@ -11,11 +11,13 @@ function ChallengeMod.addLocalization()
   G.localization.misc.challenge_names.c_mod_swapped_pockets_1 = "Swapped Pockets"
   G.localization.misc.challenge_names.c_mod_budgeting_1 = "Budgeting"
   G.localization.misc.challenge_names.c_mod_bullseye_1 = "Bullseye"
+  G.localization.misc.challenge_names.c_mod_load_bearing_1 = "Load Bearing"
   --  Challenge Descriptions
   G.localization.misc.v_text.ch_c_no_shop_planets = { "Planets no longer appear in the {C:attention}shop" }
   G.localization.misc.v_text.ch_c_no_shop_tarots = { "Tarot cards no longer appear in the {C:attention}shop" }
   G.localization.misc.v_text.ch_c_all_perishable = { "All Jokers are {C:perishable}Perishable{}" }
   G.localization.misc.v_text.ch_c_cm_negative_interest = { "Money is lost from interest" }
+  G.localization.misc.v_text.ch_c_cm_force_hand = { "Only #1#{} will score" }
   --  Credit Tag
   G.localization.misc.v_text.ch_c_cm_credit = { "Concept by: {C:green}#1#{}" }
 end
@@ -26,6 +28,16 @@ function Card:set_perishable(_perishable)
     self.ability.perishable = true
     self.ability.perish_tally = G.GAME.perishable_rounds
   end
+end
+
+local blind_debuff_hand_ref = Blind.debuff_hand
+function Blind:debuff_hand(cards, hand, handname, check)
+  if G.GAME.modifiers.cm_force_hand then
+    if G.GAME.modifiers.cm_force_hand ~= handname then
+      return true
+    end
+  end
+  return blind_debuff_hand_ref(self, cards, hand, handname, check)
 end
 
 local blind_defeat_ref = Blind.defeat
