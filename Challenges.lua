@@ -17,7 +17,7 @@ function ChallengeMod.addLocalization()
   G.localization.misc.v_text.ch_c_no_shop_tarots = { "Tarot cards no longer appear in the {C:attention}shop" }
   G.localization.misc.v_text.ch_c_all_perishable = { "All Jokers are {C:perishable}Perishable{}" }
   G.localization.misc.v_text.ch_c_cm_negative_interest = { "Money is lost from interest" }
-  G.localization.misc.v_text.ch_c_cm_force_hand = { "Only #1#{} will score" }
+  G.localization.misc.v_text.ch_c_cm_force_hand = { "Only #1#{}s will score" }
   --  Credit Tag
   G.localization.misc.v_text.ch_c_cm_credit = { "Concept by: {C:green}#1#{}" }
 end
