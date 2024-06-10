@@ -10,6 +10,7 @@ function ChallengeMod.addLocalization()
   G.localization.misc.challenge_names.c_mod_jimboful_1 = "Jimboful"
   G.localization.misc.challenge_names.c_mod_swapped_pockets_1 = "Swapped Pockets"
   G.localization.misc.challenge_names.c_mod_budgeting_1 = "Budgeting"
+  G.localization.misc.challenge_names.c_mod_bullseye_1 = "Bullseye"
   --  Challenge Descriptions
   G.localization.misc.v_text.ch_c_no_shop_planets = { "Planets no longer appear in the {C:attention}shop" }
   G.localization.misc.v_text.ch_c_no_shop_tarots = { "Tarot cards no longer appear in the {C:attention}shop" }
@@ -29,11 +30,20 @@ end
 
 local blind_defeat_ref = Blind.defeat
 function Blind:defeat(silent)
-  if G.GAME.modifiers.cm_negative_interest then
-    ease_dollars(-math.min(math.floor(G.GAME.dollars / 5), G.GAME.interest_cap / 5))
-  end
-
   blind_defeat_ref(self, silent)
+
+  if
+    G.GAME.modifiers.cm_no_overscoring and (G.GAME.chips > self.chips * (G.GAME.modifiers.cm_no_overscoring / 100))
+  then
+    G.STATE = G.STATES.GAME_OVER
+    if not G.GAME.won and not G.GAME.seeded and not G.GAME.challenge then
+      G.PROFILES[G.SETTINGS.profile].high_scores.current_streak.amt = 0
+    end
+    G:save_settings()
+    G.FILE_HANDLER.force = true
+    G.STATE_COMPLETE = false
+    G.SETTINGS.paused = false
+  end
 end
 
 local function get_chal_files(directory)
