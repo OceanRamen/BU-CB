@@ -17,12 +17,32 @@ function ChallengeMod.addLocalization()
   G.localization.misc.v_text.ch_c_cm_credit = { "Concept by: {C:green}#1#{}" }
 end
 
+local blind_debuff_hand_ref = Blind.debuff_hand
+function Blind:debuff_hand(cards, hand, handname, check)
+  if G.GAME.modifiers.cm_force_hand then
+    if G.GAME.modifiers.cm_force_hand ~= handname then
+      return true
+    end
+  end
+
+  return blind_debuff_hand_ref(self, cards, hand, handname, check)
+end
+
 function Card:set_perishable(_perishable)
   self.ability.perishable = nil
   if (self.config.center.perishable_compat or G.GAME.modifiers.all_perishable) and not self.ability.eternal then
     self.ability.perishable = true
     self.ability.perish_tally = G.GAME.perishable_rounds
   end
+end
+
+local blind_defeat_ref = Blind.defeat
+function Blind:defeat(silent)
+  if G.GAME.modifiers.cm_negative_interest then
+    ease_dollars(-math.min(math.floor(G.GAME.dollars / 5), G.GAME.interest_cap / 5))
+  end
+
+  blind_defeat_ref(self, silent)
 end
 
 local function get_chal_files(directory)
