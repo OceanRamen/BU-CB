@@ -50,11 +50,6 @@ function Blind:defeat(silent)
   end
 
   blind_defeat_ref(self, silent)
-end
-
-local blind_defeat_ref = Blind.defeat
-function Blind:defeat(silent)
-  blind_defeat_ref(self, silent)
 
   if
     G.GAME.modifiers.cm_no_overscoring and (G.GAME.chips > self.chips * (G.GAME.modifiers.cm_no_overscoring / 100))
