@@ -3,34 +3,24 @@ local nativefs = require("nativefs")
 
 function ChallengeMod.addLocalization()
   --  Challenge Names
-  G.localization.misc.challenge_names.c_mod_riffraff_1 = "Riff-Raffle"
-  G.localization.misc.challenge_names.c_mod_fleeting_1 = "Fleeting Memory"
-  G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
-  G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
-  G.localization.misc.challenge_names.c_mod_jimboful_1 = "Jimboful"
-  G.localization.misc.challenge_names.c_mod_swapped_pockets_1 = "Swapped Pockets"
   G.localization.misc.challenge_names.c_mod_budgeting_1 = "Budgeting"
   G.localization.misc.challenge_names.c_mod_bullseye_1 = "Bullseye"
+  G.localization.misc.challenge_names.c_mod_fleeting_1 = "Fleeting Memory"
+  G.localization.misc.challenge_names.c_mod_jimboful_1 = "Jimboful"
   G.localization.misc.challenge_names.c_mod_load_bearing_1 = "Load Bearing"
+  G.localization.misc.challenge_names.c_mod_riffraff_1 = "Riff-Raffle"
+  G.localization.misc.challenge_names.c_mod_student_loan_debt_1 = "Student Loan Debt"
+  G.localization.misc.challenge_names.c_mod_swapped_pockets_1 = "Swapped Pockets"
+  G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
+  G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
   --  Challenge Descriptions
+  G.localization.misc.v_text.ch_c_all_perishable = { "All Jokers are {C:perishable}Perishable{}" }
+  G.localization.misc.v_text.ch_c_cm_force_hand = { "Only #1#{}s will score" }
+  G.localization.misc.v_text.ch_c_cm_negative_interest = { "Money is lost from interest" }
   G.localization.misc.v_text.ch_c_no_shop_planets = { "Planets no longer appear in the {C:attention}shop" }
   G.localization.misc.v_text.ch_c_no_shop_tarots = { "Tarot cards no longer appear in the {C:attention}shop" }
-  G.localization.misc.v_text.ch_c_all_perishable = { "All Jokers are {C:perishable}Perishable{}" }
-  G.localization.misc.v_text.ch_c_cm_negative_interest = { "Money is lost from interest" }
-  G.localization.misc.v_text.ch_c_cm_force_hand = { "Only #1#{}s will score" }
   --  Credit Tag
   G.localization.misc.v_text.ch_c_cm_credit = { "Concept by: {C:green}#1#{}" }
-end
-
-local blind_debuff_hand_ref = Blind.debuff_hand
-function Blind:debuff_hand(cards, hand, handname, check)
-  if G.GAME.modifiers.cm_force_hand then
-    if G.GAME.modifiers.cm_force_hand ~= handname then
-      return true
-    end
-  end
-
-  return blind_debuff_hand_ref(self, cards, hand, handname, check)
 end
 
 function Card:set_perishable(_perishable)
@@ -48,7 +38,17 @@ function Blind:debuff_hand(cards, hand, handname, check)
       return true
     end
   end
+
   return blind_debuff_hand_ref(self, cards, hand, handname, check)
+end
+
+local blind_defeat_ref = Blind.defeat
+function Blind:defeat(silent)
+  if G.GAME.modifiers.cm_negative_interest then
+    ease_dollars(-math.min(math.floor(G.GAME.dollars / 5), G.GAME.interest_cap / 5))
+  end
+
+  blind_defeat_ref(self, silent)
 end
 
 local blind_defeat_ref = Blind.defeat
