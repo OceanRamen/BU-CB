@@ -33,6 +33,19 @@ payload = 'ChallengeMod.addLocalization()'
 match_indent = true
 overwrite = false
 
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if v.eternal then _joker:set_eternal(true) end"
+position = "after"
+payload = """
+if v.perishable then _joker:set_perishable(true) end
+if v.rental then _joker:set_rental(true) end
+"""
+match_indent = true
+overwrite = false
+
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
@@ -40,7 +53,7 @@ pattern = "if (area == G.shop_jokers) or (area == G.pack_cards) then"
 position = "before"
 payload = '''
 if G.GAME.modifiers.all_perishable then
-    card:set_perishable(true)
+  card:set_perishable(true)
 end
 if G.GAME.modifiers.all_rental then
   card:set_rental(true)
@@ -55,12 +68,76 @@ target = "game.lua"
 pattern = "elseif v.id == 'no_shop_jokers' then"
 position = "before"
 payload = """
+elseif v.id == 'gold_stake' then
+  self.GAME.stake = 8
+  self.GAME.modifiers.no_blind_reward = self.GAME.modifiers.no_blind_reward or {}
+  self.GAME.modifiers.no_blind_reward.Small = true
+  self.GAME.modifiers.enable_eternals_in_shop = true
+  self.GAME.starting_params.discards = self.GAME.starting_params.discards - 1
+  self.GAME.modifiers.scaling = 3
+  self.GAME.modifiers.enable_perishables_in_shop = true
+  self.GAME.modifiers.enable_rentals_in_shop = true
+elseif v.id == 'exam_stake' then
+  self.GAME.stake = 8
+  self.GAME.modifiers.no_blind_reward = self.GAME.modifiers.no_blind_reward or {}
+  self.GAME.modifiers.no_blind_reward.Small = true
+  self.GAME.starting_params.discards = self.GAME.starting_params.discards - 1
+  self.GAME.starting_params.hands = self.GAME.starting_params.hands - 1
+  self.GAME.modifiers.scaling = 4
+  self.GAME.modifiers.enable_eternals_in_shop = true
+  self.GAME.modifiers.enable_perishables_in_shop = true
+  self.GAME.modifiers.enable_rentals_in_shop = true
 elseif v.id == 'all_perishable' then
-    self.GAME.modifiers.all_perishable = true
+  self.GAME.modifiers.all_perishable = true
+elseif v.id == 'all_rental' then
+  self.GAME.modifiers.all_rental = true
 elseif v.id == 'no_shop_planets' then
-    self.GAME.planet_rate = 0
+  self.GAME.planet_rate = 0
 elseif v.id == 'no_shop_tarots' then
-    self.GAME.tarot_rate = 0
+  self.GAME.tarot_rate = 0
 """
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "if v.pinned then"
+position = "before"
+payload = '''
+if v.rental then card:set_rental(true) end
+if v.perishable then card:set_perishable(true) end
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "elseif G.GAME.modifiers.scaling == 3 then"
+position = "before"
+payload = '''
+elseif G.GAME.modifiers.scaling == 4 then
+	local amounts = {
+		300,
+		1800,
+		5760,
+		16200,
+		45000,
+		108000,
+		198000,
+		360000,
+	}
+	if ante < 1 then
+		return 100
+	end
+	if ante <= 8 then
+		return amounts[ante]
+	end
+	local a, b, c, d = amounts[8], 1.8, ante - 8, 1 + 0.2 * (ante - 8)
+	local amount = math.floor(a * (b + (k * c) ^ d) ^ c)
+	amount = amount - amount % (10 ^ math.floor(math.log10(amount) - 1))
+	return amount
+'''
 match_indent = true
 overwrite = false

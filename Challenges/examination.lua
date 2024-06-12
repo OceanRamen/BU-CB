@@ -1,9 +1,9 @@
 return {
-  name = "Fleeting Memory",
-  id = "c_mod_fleeting_1",
+  name = "The Exam",
+  id = "c_mod_examination_1",
   rules = {
     custom = {
-      { id = "all_perishable" },
+      { id = "exam_stake" },
       {
         id = "cm_credit",
         value = "Djynasty",
