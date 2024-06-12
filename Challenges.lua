@@ -13,8 +13,10 @@ function ChallengeMod.addLocalization()
   G.localization.misc.challenge_names.c_mod_swapped_pockets_1 = "Swapped Pockets"
   G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
   G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
+  G.localization.misc.challenge_names.c_mod_payasyougo_1 = "Pay As You Go"
   --  Challenge Descriptions
   G.localization.misc.v_text.ch_c_all_perishable = { "All Jokers are {C:perishable}Perishable{}" }
+  G.localization.misc.v_text.ch_c_all_rental = { "All Jokers are {C:rental}Rentals{}"}
   G.localization.misc.v_text.ch_c_cm_force_hand = { "Only #1#{}s will score" }
   G.localization.misc.v_text.ch_c_cm_negative_interest = { "Money is lost from interest" }
   G.localization.misc.v_text.ch_c_cm_no_overscoring = { "Final blind score must be lower than #1#{}%" }
@@ -30,6 +32,14 @@ function Card:set_perishable(_perishable)
     self.ability.perishable = true
     self.ability.perish_tally = G.GAME.perishable_rounds
   end
+end
+
+function Card:set_rental(_rental)
+  self.ability.rental = _rental
+  if G.GAME.modifiers.all_rental then
+    self.ability.rental = true
+  end
+  self:set_cost()
 end
 
 local blind_debuff_hand_ref = Blind.debuff_hand
