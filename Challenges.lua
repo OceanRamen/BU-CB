@@ -13,8 +13,13 @@ function ChallengeMod.addLocalization()
   G.localization.misc.challenge_names.c_mod_swapped_pockets_1 = "Swapped Pockets"
   G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
   G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
+  G.localization.misc.challenge_names.c_mod_examination_1 = "Examination"
+
   --  Challenge Descriptions
+  G.localization.misc.v_text.ch_c_gold_stake = { "Playing on the {C:attention}Gold Stake" }
+  G.localization.misc.v_text.ch_c_exam_stake = { "Playing on the {C:attention}Examination Stake" }
   G.localization.misc.v_text.ch_c_all_perishable = { "All Jokers are {C:perishable}Perishable{}" }
+  G.localization.misc.v_text.ch_c_all_rental = { "All Jokers are {C:rental}Rental{}" }
   G.localization.misc.v_text.ch_c_cm_force_hand = { "Only #1#{}s will score" }
   G.localization.misc.v_text.ch_c_cm_negative_interest = { "Money is lost from interest" }
   G.localization.misc.v_text.ch_c_cm_no_overscoring = { "Final blind score must be lower than #1#{}%" }
