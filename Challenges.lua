@@ -14,7 +14,7 @@ function ChallengeMod.addLocalization()
   G.localization.misc.challenge_names.c_mod_tarot_tycoon_1 = "Tarot Tycoon"
   G.localization.misc.challenge_names.c_mod_unfortunate_1 = "Unfortunate"
   G.localization.misc.challenge_names.c_mod_examination_1 = "Examination"
-
+  G.localization.misc.challenge_names.c_mod_payasyougo_1 = "Pay As You Go"
   --  Challenge Descriptions
   G.localization.misc.v_text.ch_c_gold_stake = { "Playing on the {C:attention}Gold Stake" }
   G.localization.misc.v_text.ch_c_exam_stake = { "Playing on the {C:attention}Examination Stake" }
