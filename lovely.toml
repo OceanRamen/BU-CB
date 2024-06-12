@@ -68,25 +68,6 @@ target = "game.lua"
 pattern = "elseif v.id == 'no_shop_jokers' then"
 position = "before"
 payload = """
-elseif v.id == 'gold_stake' then
-  self.GAME.stake = 8
-  self.GAME.modifiers.no_blind_reward = self.GAME.modifiers.no_blind_reward or {}
-  self.GAME.modifiers.no_blind_reward.Small = true
-  self.GAME.modifiers.enable_eternals_in_shop = true
-  self.GAME.starting_params.discards = self.GAME.starting_params.discards - 1
-  self.GAME.modifiers.scaling = 3
-  self.GAME.modifiers.enable_perishables_in_shop = true
-  self.GAME.modifiers.enable_rentals_in_shop = true
-elseif v.id == 'exam_stake' then
-  self.GAME.stake = 8
-  self.GAME.modifiers.no_blind_reward = self.GAME.modifiers.no_blind_reward or {}
-  self.GAME.modifiers.no_blind_reward.Small = true
-  self.GAME.starting_params.discards = self.GAME.starting_params.discards - 1
-  self.GAME.starting_params.hands = self.GAME.starting_params.hands - 1
-  self.GAME.modifiers.scaling = 4
-  self.GAME.modifiers.enable_eternals_in_shop = true
-  self.GAME.modifiers.enable_perishables_in_shop = true
-  self.GAME.modifiers.enable_rentals_in_shop = true
 elseif v.id == 'all_perishable' then
   self.GAME.modifiers.all_perishable = true
 elseif v.id == 'all_rental' then
