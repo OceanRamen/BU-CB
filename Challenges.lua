@@ -37,14 +37,6 @@ function Card:set_perishable(_perishable)
   end
 end
 
-function Card:set_rental(_rental)
-  self.ability.rental = _rental
-  if G.GAME.modifiers.all_rental then
-    self.ability.rental = true
-  end
-  self:set_cost()
-end
-
 local blind_debuff_hand_ref = Blind.debuff_hand
 function Blind:debuff_hand(cards, hand, handname, check)
   if G.GAME.modifiers.cm_force_hand then
