@@ -42,6 +42,9 @@ payload = '''
 if G.GAME.modifiers.all_perishable then
     card:set_perishable(true)
 end
+if G.GAME.modifiers.all_rental then
+  card:set_rental(true)
+end
 '''
 match_indent = true
 overwrite = false
