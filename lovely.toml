@@ -91,34 +91,3 @@ if v.perishable then card:set_perishable(true) end
 '''
 match_indent = true
 overwrite = false
-
-[[patches]]
-[patches.pattern]
-target = "functions/misc_functions.lua"
-pattern = "elseif G.GAME.modifiers.scaling == 3 then"
-position = "before"
-payload = '''
-elseif G.GAME.modifiers.scaling == 4 then
-	local amounts = {
-		300,
-		1800,
-		5760,
-		16200,
-		45000,
-		108000,
-		198000,
-		360000,
-	}
-	if ante < 1 then
-		return 100
-	end
-	if ante <= 8 then
-		return amounts[ante]
-	end
-	local a, b, c, d = amounts[8], 1.8, ante - 8, 1 + 0.2 * (ante - 8)
-	local amount = math.floor(a * (b + (k * c) ^ d) ^ c)
-	amount = amount - amount % (10 ^ math.floor(math.log10(amount) - 1))
-	return amount
-'''
-match_indent = true
-overwrite = false
