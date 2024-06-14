@@ -65,9 +65,13 @@ overwrite = false
 [[patches]]
 [patches.pattern]
 target = "game.lua"
-pattern = "elseif v.id == 'no_shop_jokers' then"
+pattern = 'elseif v.value then'
 position = "before"
 payload = """
+elseif v.id == 'cm_scaling' then
+  self.GAME.modifiers.cm_scaling = v.value
+elseif v.id == 'cm_stake' then
+  ChallengeMod.custom_stake(v.value)
 elseif v.id == 'all_perishable' then
   self.GAME.modifiers.all_perishable = true
 elseif v.id == 'all_rental' then
@@ -91,3 +95,12 @@ if v.perishable then card:set_perishable(true) end
 '''
 match_indent = true
 overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = """game_rules[#game_rules+1] = {n=G.UIT.R, config={align = "cl"}, nodes= localize{type = 'text', key = 'ch_c_'..v.id, vars = {v.value}}}"""
+position = "at"
+payload = """game_rules[#game_rules+1] = {n=G.UIT.R, config={align = "cl"}, nodes= localize{type = 'text', key = 'ch_c_'..v.id, vars = {v.value, v.name}}}"""
+match_indent = true
+overwrite = true
