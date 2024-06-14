@@ -38,38 +38,36 @@ function ChallengeMod.addLocalization()
   G.localization.misc.v_text.ch_c_no_shop_tarots = { "Tarots no longer appear in the {C:attention}shop{}" }
   G.localization.misc.v_text.ch_c_cm_stake = { "Playing on the {C:attention}#2#{} stake" }
   G.localization.misc.v_text.ch_c_cm_scaling = { "Custom ante scaling" }
+  G.localization.misc.v_text.ch_c_cm_scaling_manual = { "Custom ante and blind scaling" }
   --  Credit Tags
   G.localization.misc.v_text.ch_c_cm_credit = { "Concept by: {C:green}#1#{}" }
 end
 
-function ChallengeMod.custom_stake(stake)
-  G.GAME.stake = stake
-  if G.GAME.stake >= 2 then
-    G.GAME.modifiers.no_blind_reward = G.GAME.modifiers.no_blind_reward or {}
-    G.GAME.modifiers.no_blind_reward.Small = true
-  end
-  if G.GAME.stake >= 3 then
-    G.GAME.modifiers.scaling = 2
-  end
-  if G.GAME.stake >= 4 then
-    G.GAME.modifiers.enable_eternals_in_shop = true
-  end
-  if G.GAME.stake >= 5 then
-    G.GAME.starting_params.discards = G.GAME.starting_params.discards - 1
-  end
-  if G.GAME.stake >= 6 then
-    G.GAME.modifiers.scaling = 3
-  end
-  if G.GAME.stake >= 7 then
-    G.GAME.modifiers.enable_perishables_in_shop = true
-  end
-  if G.GAME.stake >= 8 then
-    G.GAME.modifiers.enable_rentals_in_shop = true
-  end
-  if G.GAME.stake >= 9 then
-    G.GAME.modifiers.scaling = 4
-  end
-end
+-- function ChallengeMod.custom_stake(stake)
+--   G.GAME.stake = stake
+--   if G.GAME.stake >= 2 then
+--     G.GAME.modifiers.no_blind_reward = G.GAME.modifiers.no_blind_reward or {}
+--     G.GAME.modifiers.no_blind_reward.Small = true
+--   end
+--   if G.GAME.stake >= 3 then
+--     G.GAME.modifiers.scaling = 2
+--   end
+--   if G.GAME.stake >= 4 then
+--     G.GAME.modifiers.enable_eternals_in_shop = true
+--   end
+--   if G.GAME.stake >= 5 then
+--     G.GAME.starting_params.discards = G.GAME.starting_params.discards - 1
+--   end
+--   if G.GAME.stake >= 6 then
+--     G.GAME.modifiers.scaling = 3
+--   end
+--   if G.GAME.stake >= 7 then
+--     G.GAME.modifiers.enable_perishables_in_shop = true
+--   end
+--   if G.GAME.stake >= 8 then
+--     G.GAME.modifiers.enable_rentals_in_shop = true
+--   end
+-- end
 
 function get_blind_amount(ante)
   local k = 0.75
@@ -153,6 +151,41 @@ function get_blind_amount(ante)
   end
 end
 
+function taxedAlert(text)
+  G.E_MANAGER:add_event(Event({
+    trigger = "after",
+    delay = 0.4,
+    func = function()
+      attention_text({
+        text = text,
+        scale = 0.8,
+        hold = 4,
+        major = G.STAGE == G.STAGES.RUN and G.play or G.title_top,
+        backdrop_colour = G.C.MONEY,
+        align = "cm",
+        offset = {
+          x = 0,
+          y = -3.5,
+        },
+        silent = true,
+      })
+      G.E_MANAGER:add_event(Event({
+        trigger = "after",
+        delay = 0.06 * G.SETTINGS.GAMESPEED,
+        blockable = false,
+        blocking = false,
+        func = function()
+          play_sound("coin3", 0.76, 0.4)
+          play_sound("coin4", 0.76, 0.4)
+          return true
+        end,
+      }))
+      return true
+    end,
+  }))
+end
+
+
 function Card:set_perishable(_perishable)
   self.ability.perishable = nil
   if (self.config.center.perishable_compat or G.GAME.modifiers.all_perishable) and not self.ability.eternal then
@@ -175,7 +208,9 @@ end
 local blind_defeat_ref = Blind.defeat
 function Blind:defeat(silent)
   if G.GAME.modifiers.cm_negative_interest then
-    ease_dollars(-math.min(math.floor(G.GAME.dollars / 5), G.GAME.interest_cap / 5))
+    local tax = math.min(math.floor(G.GAME.dollars / 5), G.GAME.interest_cap / 5)
+    taxedAlert("-$"..tax)
+    ease_dollars(-tax)
   end
 
   blind_defeat_ref(self, silent)
@@ -193,8 +228,6 @@ function Blind:defeat(silent)
     G.SETTINGS.paused = false
   end
 end
-
--- Sort CustomChallenges
 
 for i, v in pairs(CustomChallenges) do
   table.insert(G.CHALLENGES, #G.CHALLENGES + 1, v)
