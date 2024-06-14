@@ -5,7 +5,7 @@ return {
     custom = {
       { id = "no_shop_planets" },
       { id = "no_shop_tarots" },
-      { id = "gold_stake" },
+      -- { id = "cm_stake", value = 8, name = "Gold" },
       {
         id = "cm_credit",
         value = "Djynasty",
