@@ -37,15 +37,8 @@ function ChallengeMod.addLocalization()
   G.localization.misc.v_text.ch_c_cm_no_overscoring = { "{C:attention}Blind{} score must not exceed {C:green}#1#%{}" }
   G.localization.misc.v_text.ch_c_no_shop_planets = { "Planets no longer appear in the {C:attention}shop{}" }
   G.localization.misc.v_text.ch_c_no_shop_tarots = { "Tarots no longer appear in the {C:attention}shop{}" }
-  --  Custom Descriptions
-  G.localization.misc.v_text.ch_c_cm_description_1 = { "#1#{}" }
-  G.localization.misc.v_text.ch_c_cm_description_2 = { "#1#{}" }
-  G.localization.misc.v_text.ch_c_cm_description_3 = { "#1#{}" }
-  G.localization.misc.v_text.ch_c_cm_description_4 = { "#1#{}" }
-  G.localization.misc.v_text.ch_c_cm_description_5 = { "#1#{}" }
   --  Credit Tags
   G.localization.misc.v_text.ch_c_cm_credit = { "Concept by: {C:green}#1#{}" }
-  G.localization.misc.v_text.ch_c_cm_author = { "Author: {C:green}#1#{}" }
 end
 
 function Card:set_perishable(_perishable)
