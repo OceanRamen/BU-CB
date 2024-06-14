@@ -68,30 +68,10 @@ target = "game.lua"
 pattern = 'elseif v.value then'
 position = "before"
 payload = """
+elseif v.id == 'cm_scaling' then
+  self.GAME.modifiers.cm_scaling = v.value
 elseif v.id == 'cm_stake' then
-  self.GAME.stake = v.value
-	if self.GAME.stake >= 2 then
-		self.GAME.modifiers.no_blind_reward = self.GAME.modifiers.no_blind_reward or {}
-		self.GAME.modifiers.no_blind_reward.Small = true
-	end
-	if self.GAME.stake >= 3 then
-		self.GAME.modifiers.scaling = 2
-	end
-	if self.GAME.stake >= 4 then
-		self.GAME.modifiers.enable_eternals_in_shop = true
-	end
-	if self.GAME.stake >= 5 then
-		self.GAME.starting_params.discards = self.GAME.starting_params.discards - 1
-	end
-	if self.GAME.stake >= 6 then
-		self.GAME.modifiers.scaling = 3
-	end
-	if self.GAME.stake >= 7 then
-		self.GAME.modifiers.enable_perishables_in_shop = true
-	end
-	if self.GAME.stake >= 8 then
-		self.GAME.modifiers.enable_rentals_in_shop = true
-  end
+  ChallengeMod.custom_stake(v.value)
 elseif v.id == 'all_perishable' then
   self.GAME.modifiers.all_perishable = true
 elseif v.id == 'all_rental' then
