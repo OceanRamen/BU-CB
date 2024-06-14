@@ -6,6 +6,10 @@ return {
       { id = "no_shop_planets" },
       { id = "no_shop_tarots" },
       { id = "gold_stake" },
+      {
+        id = "cm_credit",
+        value = "Djynasty",
+      },
     },
     modifiers = {
       {
