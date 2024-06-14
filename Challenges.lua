@@ -20,12 +20,11 @@ local CustomChallenges = {}
 
 for _, file in ipairs(lua_files) do
   local file_path = directory .. "/" .. file
-  local variable_name = file:gsub("%.lua$", "")
-  CustomChallenges[variable_name] = dofile(file_path)
+  table.insert(CustomChallenges, dofile(file_path))
 end
 
 function ChallengeMod.addLocalization()
-  for i, v in pairs(CustomChallenges) do
+  for i, v in ipairs(CustomChallenges) do
     G.localization.misc.challenge_names[v.id] = v.name
   end
 
