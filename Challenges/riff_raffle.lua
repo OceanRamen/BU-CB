@@ -15,6 +15,10 @@ return {
       {
         id = "no_shop_jokers",
       },
+      {
+        id = "cm_credit",
+        value = "UppedHealer8521",
+      },
     },
     modifiers = {
       {

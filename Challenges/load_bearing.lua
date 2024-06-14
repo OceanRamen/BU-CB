@@ -1,5 +1,5 @@
 return {
-  name = "Load bearing",
+  name = "Load Bearing",
   id = "c_mod_load_bearing_1",
   rules = {
     custom = {
