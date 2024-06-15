@@ -23,6 +23,8 @@ return {
   vouchers = {
     { id = "v_overstock_norm" },
     -- { id = "v_overstock_plus" },
+    { id = "v_tarot_merchant" },
+    { id = "v_planet_merchant" },
   },
   deck = {
     type = "Anaglyph Deck",
