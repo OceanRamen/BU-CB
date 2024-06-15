@@ -3,6 +3,10 @@ return{
         id = 'c_mod_cryptojacked_1',
         rules = {
             custom = {
+			{
+			id = "cm_credit",
+			value = "Millie",
+			},
             },
             modifiers = {
 			{ id = "discards", value = 0 },

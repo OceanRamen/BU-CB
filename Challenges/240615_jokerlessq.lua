@@ -4,6 +4,10 @@ return{
         rules = {
             custom = {
                 {id = 'no_shop_jokers'},
+				{
+				id = "cm_credit",
+				value = "Millie",
+				},
             },
             modifiers = {
             }
