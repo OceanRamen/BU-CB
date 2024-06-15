@@ -42,6 +42,11 @@ position = "after"
 payload = """
 if v.perishable then _joker:set_perishable(true) end
 if v.rental then _joker:set_rental(true) end
+if v.debuff then 
+	_joker.debuff = true
+	_joker.ability.perishable = true
+	_joker.ability.perish_tally = 0
+end
 """
 match_indent = true
 overwrite = false
