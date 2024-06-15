@@ -96,7 +96,11 @@ return {
       { id = "v_magic_trick" },
       { id = "v_illusion" },
     },
-    banned_tags = {},
+    banned_tags = {
+      {
+        id = "tag_standard",
+      },
+    },
     banned_other = {
       { id = "bl_arm", type = "blind" },
       { id = "bl_eye", type = "blind" },
