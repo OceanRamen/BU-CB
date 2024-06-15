@@ -25,7 +25,7 @@ return {
     -- { id = "v_overstock_plus" },
   },
   deck = {
-    type = "Challenge Deck",
+    type = "Anaglyph Deck",
   },
   restrictions = {
     banned_cards = {
