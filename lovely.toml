@@ -68,6 +68,8 @@ target = "game.lua"
 pattern = 'elseif v.value then'
 position = "before"
 payload = """
+elseif v.id == 'cm_noshop' then
+  self.GAME.modifiers.cm_noshop = true
 elseif v.id == 'cm_scaling' then
   self.GAME.modifiers.cm_scaling = v.value
 elseif v.id == 'cm_stake' then
@@ -105,3 +107,15 @@ payload = """game_rules[#game_rules+1] = {n=G.UIT.R, config={align = "cl"}, node
 match_indent = true
 overwrite = true
 
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = 'function Game:update_shop(dt)'
+position = "after"
+payload = """
+if G.GAME.modifiers.cm_noshop then
+  return Game:update_blind_select(dt)
+end
+"""
+match_indent = true
+overwrite = false
