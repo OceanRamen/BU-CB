@@ -40,6 +40,7 @@ function ChallengeMod.addLocalization()
   G.localization.misc.v_text.ch_c_cm_scaling = { "Custom ante scaling" }
   G.localization.misc.v_text.ch_c_cm_scaling_manual = { "Custom ante and blind scaling" }
   G.localization.misc.v_text.ch_c_cm_noshop = { "{C:attention}No Shop" }
+  G.localization.misc.v_text.ch_c_cm_hand_kills = { "Lose the game if played hand contains a {C:blue}#1#{}" }
   --  Credit Tags
   G.localization.misc.v_text.ch_c_cm_credit = { "Concept by: {C:green}#1#{}" }
 end
@@ -168,11 +169,31 @@ function Card:set_perishable(_perishable)
   end
 end
 
+function ChallengeMod.fold()
+  G.STATE = G.STATES.GAME_OVER
+  if not G.GAME.won and not G.GAME.seeded and not G.GAME.challenge then
+    G.PROFILES[G.SETTINGS.profile].high_scores.current_streak.amt = 0
+  end
+  G:save_settings()
+  G.FILE_HANDLER.force = true
+  G.STATE_COMPLETE = false
+  G.SETTINGS.paused = false
+end
+
 local blind_debuff_hand_ref = Blind.debuff_hand
 function Blind:debuff_hand(cards, hand, handname, check)
   if G.GAME.modifiers.cm_force_hand then
     if G.GAME.modifiers.cm_force_hand ~= handname then
       return true
+    end
+  end
+
+  if not check then
+    if G.GAME.modifiers.cm_hand_kills then
+      poker_hands = evaluate_poker_hand(cards)
+      if next(poker_hands[G.GAME.modifiers.cm_hand_kills]) ~= nil then
+        ChallengeMod.fold()
+      end
     end
   end
 
@@ -192,14 +213,7 @@ function Blind:defeat(silent)
   if
     G.GAME.modifiers.cm_no_overscoring and (G.GAME.chips > self.chips * (G.GAME.modifiers.cm_no_overscoring / 100))
   then
-    G.STATE = G.STATES.GAME_OVER
-    if not G.GAME.won and not G.GAME.seeded and not G.GAME.challenge then
-      G.PROFILES[G.SETTINGS.profile].high_scores.current_streak.amt = 0
-    end
-    G:save_settings()
-    G.FILE_HANDLER.force = true
-    G.STATE_COMPLETE = false
-    G.SETTINGS.paused = false
+    ChallengeMod.fold()
   end
 end
 
