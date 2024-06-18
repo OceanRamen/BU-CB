@@ -31,7 +31,7 @@ function ChallengeMod.addLocalization()
   --  Challenge Descriptions
   G.localization.misc.v_text.ch_c_all_perishable = { "All Jokers are {C:attention}Perishable{}" }
   G.localization.misc.v_text.ch_c_all_rental = { "All Jokers are {C:attention}Rental{}" }
-  G.localization.misc.v_text.ch_c_cm_force_hand = { "Only {C:blue}#1#s{} will score" }
+  G.localization.misc.v_text.ch_c_cm_force_hand = { "Played hands must contain a {C:blue}#1#{}" }
   G.localization.misc.v_text.ch_c_cm_negative_interest = { "Money is lost from {C:attention}Interest{}" }
   G.localization.misc.v_text.ch_c_cm_no_overscoring = { "{C:attention}Blind{} score must not exceed {C:green}#1#%{}" }
   G.localization.misc.v_text.ch_c_no_shop_planets = { "Planets no longer appear in the {C:attention}shop{}" }
@@ -183,14 +183,18 @@ end
 local blind_debuff_hand_ref = Blind.debuff_hand
 function Blind:debuff_hand(cards, hand, handname, check)
   if G.GAME.modifiers.cm_force_hand then
-    if G.GAME.modifiers.cm_force_hand ~= handname then
+    if check then
+      cards = G.hand.highlighted
+    end
+    local poker_hands = evaluate_poker_hand(cards)
+    if next(poker_hands[G.GAME.modifiers.cm_force_hand]) == nil then
       return true
     end
   end
 
   if not check then
     if G.GAME.modifiers.cm_hand_kills then
-      poker_hands = evaluate_poker_hand(cards)
+      local poker_hands = evaluate_poker_hand(cards)
       if next(poker_hands[G.GAME.modifiers.cm_hand_kills]) ~= nil then
         ChallengeMod.fold()
       end
