@@ -82,6 +82,8 @@ elseif v.id == 'no_shop_planets' then
   self.GAME.planet_rate = 0
 elseif v.id == 'no_shop_tarots' then
   self.GAME.tarot_rate = 0
+elseif v.id == 'cm_all_facedown' then
+  self.GAME.modifiers.cm_all_facedown = true
 """
 match_indent = true
 overwrite = false
@@ -115,6 +117,51 @@ position = "after"
 payload = """
 if G.GAME.modifiers.cm_noshop then
   return Game:update_blind_select(dt)
+end
+"""
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "nuGC(nil, nil, true)"
+position = "after"
+payload = """
+if G.GAME.modifiers.cm_all_facedown == true then G.debug_tooltip_toggle = true else G.debug_tooltip_toggle = false end
+"""
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = """self.facing = 'front'"""
+position = "after"
+payload = """if G.GAME.modifiers.cm_all_facedown == true then
+self.facing = 'back' end"""
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = """self.sprite_facing = 'front'"""
+position = "after"
+payload = """if G.GAME.modifiers.cm_all_facedown == true then
+self.sprite_facing = 'back' end"""
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "local stay_flipped = G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(self, card)"
+position = "before"
+payload = """
+if G.GAME.modifiers.cm_all_facedown == true then
+card.facing = 'front'
+card.sprite_facing = 'front'
 end
 """
 match_indent = true
