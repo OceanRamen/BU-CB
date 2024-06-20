@@ -32,6 +32,11 @@ return {
       { id = "v_recyclomancy" },
     },
     banned_tags = {},
-    banned_other = {},
+    banned_other = {
+      { id = "bl_eye", type = "blind" },
+      { id = "bl_mouth", type = "blind" },
+      { id = "bl_arm", type = "blind" },
+      { id = "bl_ox", type = "blind" },
+    },
   },
 }
