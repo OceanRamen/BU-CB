@@ -3,8 +3,7 @@ return {
   id = "c_mod_sixes_1",
   rules = {
     custom = {
-      { id = "no_shop_tarots" },
-      { id = "no_shop_jokers" },
+      { id = "cm_noshop"},
       { id = "no_reward_specific", value = "Small"},
       {
         id = "cm_credit",
