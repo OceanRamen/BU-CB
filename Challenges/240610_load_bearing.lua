@@ -4,7 +4,7 @@ return {
   rules = {
     custom = {
       {
-        id = "cm_force_hand",
+        id = "cm_force_hand_contains",
         value = "Straight",
       },
       {

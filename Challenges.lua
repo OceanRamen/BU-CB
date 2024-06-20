@@ -31,7 +31,8 @@ function ChallengeMod.addLocalization()
   --  Challenge Descriptions
   G.localization.misc.v_text.ch_c_all_perishable = { "All Jokers are {C:attention}Perishable{}" }
   G.localization.misc.v_text.ch_c_all_rental = { "All Jokers are {C:attention}Rental{}" }
-  G.localization.misc.v_text.ch_c_cm_force_hand = { "Played hands must contain a {C:blue}#1#{}" }
+  G.localization.misc.v_text.ch_c_cm_force_hand = { "Only {C:blue}#1#{} hands will score" }
+  G.localization.misc.v_text.ch_c_cm_force_hand_contains = { "Played hands must contain a {C:blue}#1#{}" }
   G.localization.misc.v_text.ch_c_cm_negative_interest = { "Money is lost from {C:attention}Interest{}" }
   G.localization.misc.v_text.ch_c_cm_no_overscoring = { "{C:attention}Blind{} score must not exceed {C:green}#1#%{}" }
   G.localization.misc.v_text.ch_c_no_shop_planets = { "Planets no longer appear in the {C:attention}shop{}" }
@@ -41,7 +42,7 @@ function ChallengeMod.addLocalization()
   G.localization.misc.v_text.ch_c_cm_scaling_manual = { "Custom ante and blind scaling" }
   G.localization.misc.v_text.ch_c_cm_noshop = { "{C:attention}No Shop" }
   G.localization.misc.v_text.ch_c_cm_hand_kills = { "Lose the game if played hand contains a {C:blue}#1#{}" }
-  G.localization.misc.v_text.ch_c_cm_all_facedown = { "All cards except those held in hand are face down"}
+  G.localization.misc.v_text.ch_c_cm_all_facedown = { "All cards except those held in hand are face down" }
   --  Credit Tags
   G.localization.misc.v_text.ch_c_cm_credit = { "Concept by: {C:green}#1#{}" }
 end
@@ -122,11 +123,17 @@ end
 local blind_debuff_hand_ref = Blind.debuff_hand
 function Blind:debuff_hand(cards, hand, handname, check)
   if G.GAME.modifiers.cm_force_hand then
+    if G.GAME.modifiers.cm_force_hand ~= handname then
+      return true
+    end
+  end
+
+  if G.GAME.modifiers.cm_force_hand_contains then
     if check then
       cards = G.hand.highlighted
     end
     local poker_hands = evaluate_poker_hand(cards)
-    if next(poker_hands[G.GAME.modifiers.cm_force_hand]) == nil then
+    if next(poker_hands[G.GAME.modifiers.cm_force_hand_contains]) == nil then
       return true
     end
   end
