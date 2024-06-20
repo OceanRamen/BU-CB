@@ -41,6 +41,7 @@ function ChallengeMod.addLocalization()
   G.localization.misc.v_text.ch_c_cm_scaling_manual = { "Custom ante and blind scaling" }
   G.localization.misc.v_text.ch_c_cm_noshop = { "{C:attention}No Shop" }
   G.localization.misc.v_text.ch_c_cm_hand_kills = { "Lose the game if played hand contains a {C:blue}#1#{}" }
+  G.localization.misc.v_text.ch_c_cm_all_facedown = { "All cards except those held in hand are face down"}
   --  Credit Tags
   G.localization.misc.v_text.ch_c_cm_credit = { "Concept by: {C:green}#1#{}" }
 end
