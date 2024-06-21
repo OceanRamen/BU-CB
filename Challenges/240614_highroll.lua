@@ -18,15 +18,17 @@ return {
   vouchers = {
     { id = "v_overstock_norm" },
     { id = "v_overstock_plus" },
-    { id = "v_crystal_ball" },
-    { id = "v_omen_globe" },
   },
   deck = {
     type = "Challenge Deck",
   },
   restrictions = {
-    banned_cards = {},
-    banned_tags = {},
+    banned_cards = {
+      { id = 'j_chaos' },
+    },
+    banned_tags = {
+      { id = 'tag_d_six' },
+    },
     banned_other = {},
   },
 }
