@@ -89,7 +89,7 @@ return {
       { id = "tag_ethereal" },
     },
     banned_other = {
-      { id = "bl_eye", type = "blind" },
+      -- { id = "bl_eye", type = "blind" },
     },
   },
 }

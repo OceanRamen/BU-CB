@@ -4,7 +4,7 @@ return {
   rules = {
     custom = {
       {
-        id = "cm_force_hand",
+        id = "cm_force_hand_contains",
         value = "Straight",
       },
       {
@@ -102,9 +102,9 @@ return {
       },
     },
     banned_other = {
-      { id = "bl_arm", type = "blind" },
       { id = "bl_eye", type = "blind" },
       { id = "bl_mouth", type = "blind" },
+      { id = "bl_arm", type = "blind" },
       { id = "bl_ox", type = "blind" },
     },
   },

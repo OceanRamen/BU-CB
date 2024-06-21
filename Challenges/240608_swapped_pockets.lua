@@ -32,7 +32,16 @@ return {
     },
   },
   jokers = {},
-  consumeables = {},
+  consumeables = {
+    { id = 'c_empress'},
+    { id = 'c_justice'},
+    { id = 'c_tower'},
+    { id = 'c_chariot'},
+    { id = 'c_hermit'},
+    { id = 'c_high_priestess'},
+    { id = 'c_fool'},
+    { id = 'c_aura'},
+  },
   vouchers = {},
   deck = {
     type = "Challenge Deck",
