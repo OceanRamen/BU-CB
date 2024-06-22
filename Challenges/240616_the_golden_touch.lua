@@ -31,7 +31,7 @@ local banned_cards = {
 
 local joker_names = {
   -- "j_juggler",
-  "j_stone",
+  "j_marble",
   "j_golden",
   "j_credit_card",
   "j_delayed_grat",
