@@ -171,3 +171,37 @@ end
 """
 match_indent = true
 overwrite = false
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "eval = G.jokers.cards[i]:calculate_joker({end_of_round = true, game_over = game_over})"
+position = "at"
+payload = """
+if not G.GAME.modifiers.cm_no_after_round then eval = G.jokers.cards[i]:calculate_joker({end_of_round = true, game_over = game_over}) end
+"""
+match_indent = true
+overwrite = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "local effects = eval_card(G.jokers.cards[i], {cardarea = G.jokers, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, after = true})"
+position = "at"
+payload = """
+local effects = {}
+if not G.GAME.modifiers.cm_no_after_hand then effects = eval_card(G.jokers.cards[i], {cardarea = G.jokers, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, after = true}) end
+"""
+match_indent = true
+overwrite = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "eval = G.jokers.cards[j]:calculate_joker({discard = true, other_card =  G.hand.highlighted[i], full_hand = G.hand.highlighted})"
+position = "at"
+payload = """
+if not G.GAME.modifiers.cm_no_on_discard then eval = G.jokers.cards[j]:calculate_joker({discard = true, other_card =  G.hand.highlighted[i], full_hand = G.hand.highlighted}) end
+"""
+match_indent = true
+overwrite = true
